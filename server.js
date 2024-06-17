@@ -108,9 +108,13 @@ wss.on("connection", async (ws, req) => {
         file: file || "",
       });
       await newMessage.save();
+      // sort by latest message
       const messages = await Message.find({
         sender: senderId,
-      }).populate("sender receiver");
+      })
+        .populate("sender receiver")
+        .sort({ createdAt: -1 });
+
       ws.send(JSON.stringify(messages));
     } catch (err) {
       ws.send(JSON.stringify({ error: "Authentication failed" }));
