@@ -5,6 +5,7 @@ const messageSchema = new mongoose.Schema({
   message: String,
   file: String,
   timestamp: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
 });
 const Message = mongoose.model("Message", messageSchema);
 exports.Message = Message;
