@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      MONGO_URI: mongodb://mongo:27017/chat
+      MONGO_URI: mongodb+srv://chat:chat@cluster0.k9mvkdi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     depends_on:
       - mongo
 
