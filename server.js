@@ -80,7 +80,10 @@ wss.on("connection", async (ws, req) => {
     const { userId } = jwt.verify(token, process.env.SECRET_KEY);
     const messages = await Message.find({
       sender: userId,
-    }).populate("sender receiver");
+    })
+      .populate("sender receiver")
+      .sort({ createdAt: -1 });
+
     ws.send(JSON.stringify(messages));
   } catch (err) {
     ws.send(JSON.stringify({ error: "Authentication failed" }));
