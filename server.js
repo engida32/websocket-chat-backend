@@ -72,7 +72,6 @@ const wss = new WebSocket.Server({
 
 // Websocket connection
 wss.on("connection", async (ws, req) => {
-  console.log("Client connected");
   // console.log(req.url, "req.query");
   const token = req.url.split("=")[1];
   // console.log(token, "token");
@@ -91,19 +90,9 @@ wss.on("connection", async (ws, req) => {
 
   ws.on("message", async (data) => {
     const { token, receiverId, message, file } = JSON.parse(data);
-    console.log(
-      token,
-      "token",
-      receiverId,
-      "receiverId",
-      message,
-      "message",
-      file,
-      "file"
-    );
+
     try {
       const { userId: senderId } = jwt.verify(token, process.env.SECRET_KEY);
-      console.log(senderId, "senderId");
       const newMessage = new Message({
         sender: senderId,
         receiver: receiverId,
