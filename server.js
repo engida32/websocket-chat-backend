@@ -46,10 +46,10 @@ app.post("/login", async (req, res) => {
       { userId: user._id, username },
       process.env.SECRET_KEY,
       {
-        expiresIn: "1h",
+        expiresIn: "2h",
       }
     );
-    res.json({ token });
+    res.json({ token, username });
   } else {
     res.status(401).json({ error: "Invalid username or password" });
   }
