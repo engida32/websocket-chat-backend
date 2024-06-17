@@ -111,6 +111,7 @@ wss.on("connection", async (ws, req) => {
       const messages = await Message.find({
         sender: senderId,
       }).populate("sender receiver");
+      ws.send(JSON.stringify(messages));
     } catch (err) {
       ws.send(JSON.stringify({ error: "Authentication failed" }));
     }
